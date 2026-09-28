@@ -6,19 +6,8 @@ import authorization from "models/authorization";
 const router = createRouter();
 
 router.use(controller.injectAnonymousOrUser);
-router.get(
-  controller.logRequest("migrations.listed", "Migrações listadas com sucesso."),
-  controller.canRequest("read:migrations"),
-  getHandler,
-);
-router.post(
-  controller.logRequest(
-    "migrations.executed",
-    "Migrações executadas com sucesso.",
-  ),
-  controller.canRequest("create:migrations"),
-  postHandler,
-);
+router.get(controller.canRequest("read:migrations"), getHandler);
+router.post(controller.canRequest("create:migrations"), postHandler);
 
 export default router.handler(controller.errorHandlers);
 

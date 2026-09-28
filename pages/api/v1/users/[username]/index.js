@@ -75,13 +75,8 @@ async function patchHandler(request, response) {
 
 export default createRouter()
   .use(controller.injectAnonymousOrUser)
-  .get(
-    controller.logRequest("user.fetched", "Usuário consultado com sucesso."),
-    getValidationHandler,
-    getHandler,
-  )
+  .get(getValidationHandler, getHandler)
   .patch(
-    controller.logRequest("user.updated", "Usuário atualizado com sucesso."),
     patchValidationHandler,
     controller.canRequest("update:user"),
     patchHandler,

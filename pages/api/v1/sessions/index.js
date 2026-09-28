@@ -74,13 +74,9 @@ async function deleteHandler(request, response) {
 export default createRouter()
   .use(controller.injectAnonymousOrUser)
   .post(
-    controller.logRequest("session.created", "Sessão criada com sucesso."),
     postValidationHandler,
     controller.canRequest("create:session"),
     postHandler,
   )
-  .delete(
-    controller.logRequest("session.deleted", "Sessão encerrada com sucesso."),
-    deleteHandler,
-  )
+  .delete(deleteHandler)
   .handler(controller.errorHandlers);
